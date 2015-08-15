@@ -63,10 +63,12 @@ func isoHead(rw http.ResponseWriter, rq *http.Request) {
 
 		drawIsometricCube(out, fo, fo, fs, fs, img, top, left, right)
 
-		top = image.Rect(32+8, 0, 32+16, 8)
-		left = image.Rect(32+0, 8, 32+8, 16)
-		right = image.Rect(32+8, 8, 32+16, 16)
-		drawIsometricCube(out, 0, 0, size, size, img, top, left, right)
+		if hat == "hat" {
+			top = image.Rect(32+8, 0, 32+16, 8)
+			left = image.Rect(32+0, 8, 32+8, 16)
+			right = image.Rect(32+8, 8, 32+16, 16)
+			drawIsometricCube(out, 0, 0, size, size, img, top, left, right)
+		}
 
 		var buf bytes.Buffer
 		png.Encode(&buf, out)
