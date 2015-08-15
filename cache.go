@@ -20,7 +20,6 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"sync"
 	"sync/atomic"
@@ -174,7 +173,6 @@ func imageGCWatcher() {
 }
 
 func imageGC() {
-	log.Println("Cleaning up old images")
 	cacheLock.Lock()
 	defer cacheLock.Unlock()
 	now := time.Now()
@@ -182,7 +180,6 @@ func imageGC() {
 		lastAccess := v.LastAccess.Load().(time.Time)
 		if now.Sub(lastAccess) > v.staleTime || now.Sub(v.Created) > Config.RefetchTime {
 			delete(imageCache, k)
-			log.Println("Removed ", k)
 		}
 	}
 }
