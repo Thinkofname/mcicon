@@ -57,9 +57,15 @@ func basicIcon(rw http.ResponseWriter, rq *http.Request) {
 			return
 		}
 		out := image.NewNRGBA(image.Rect(0, 0, size, size))
+		fs := size
+		fo := 0
+		if hat == "hat" {
+			fo = int(float64(fs) * (1.0 / 32.0))
+			fs -= fo
+		}
 		draw.NearestNeighbor.Scale(
 			out,
-			image.Rect(0, 0, size, size),
+			image.Rect(fo, fo, fs, fs),
 			img,
 			image.Rect(8, 8, 8+8, 8+8),
 			draw.Over,
