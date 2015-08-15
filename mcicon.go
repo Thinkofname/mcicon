@@ -47,6 +47,11 @@ func main() {
 	r.HandleFunc("/icons/head/{uuid:[a-f0-9]{32}}/{size:[0-9]+}", basicIcon)
 	r.HandleFunc("/icons/head/{uuid:[a-f0-9]{32}}/{hat:hat}/{size:[0-9]+}", basicIcon)
 
+	r.HandleFunc("/icons/head3d/{uuid:[a-f0-9]{32}}", isoHead)
+	r.HandleFunc("/icons/head3d/{uuid:[a-f0-9]{32}}/{hat:hat}", isoHead)
+	r.HandleFunc("/icons/head3d/{uuid:[a-f0-9]{32}}/{size:[0-9]+}", isoHead)
+	r.HandleFunc("/icons/head3d/{uuid:[a-f0-9]{32}}/{hat:hat}/{size:[0-9]+}", isoHead)
+
 	log.Printf("Starting mcicon at http://%s:%d", Config.Host, Config.Port)
 	log.Println(
 		http.ListenAndServe(fmt.Sprintf("%s:%d", Config.Host, Config.Port), r),
